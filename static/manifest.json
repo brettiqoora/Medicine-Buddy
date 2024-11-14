@@ -1,0 +1,34 @@
+{"name": "iQoora",
+"short_name": "iQoora",
+"start_url": "/?home=true",
+"description": "iQoora Task Manager",
+"icons": [
+    {
+      "src": "/static/icons/icon50.png",
+      "sizes": "50x50",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/icon100.png",
+      "sizes": "100x100",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/icon150.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },{
+      "src": "/static/icons/icon250.png",
+      "sizes": "250x250",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icons/icon500.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ],
+"theme_color": "#000000",
+"background_color": "#FFFFFF",
+"display": "standalone",
+"orientation": "portrait"}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title%}
+BooyaKasha!
+{% endblock %}
+
+{% block head%}
+<h1>Welcome to the Update page</h1>
+{% endblock %}
+
+{% block body%}
+<div class= "content"; style="text-align: center">
+  <h1>Update Task {{task.content}}</h1>
+
+  
+
+  <div>
+
+    <form actions = "/update/{{task.id}}" method="POST">
+      <input type="text" name="content" id="content" placeholder="Description" value="{{task.content}}"">
+      <br>
+      <input type="text" name="owner" id="owner" placeholder="Owner" list="owners" value = "{{task.owner}}"">
+      <datalist id="owners">
+          {% for owner in owners %}
+          <option value="{{owner.name}}">
+          {% endfor %}
+      </datalist>
+      
+      <br>
+      <input type="submit" value="Update Task">
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+

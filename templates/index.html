@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Booya!
+{% endblock %}
+
+{% block head%}
+<h1>Welcome to the page</h1>
+{% endblock %}
+
+{% block body%}
+<div class= "content"; style="text-align: center">
+  <a target="_blank" href="https://icons8.com/icon/spI43Cg8MTCV/reminders">App</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+  <h1>Task Master</h1>
+  
+  <a href="/gotoAddOwner/">Add Owner</a>
+  
+
+  <table class = "center">
+    <tr>
+      <th>Task</th>  
+      <th>Owner</th>  
+      <th>Added</th>  
+      <th>Completed</th>  
+      <th>Actions</th>  
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.content}}</td>
+        <td>{{task.owner}}</td>
+        <td>{{task.date_created.date()}}</td>
+        <td>{{ task.date_completed.strftime('%d/%m/%Y, %H:%M:%S') if task.date_completed is not none else '' }}</td>
+        <td>
+            <a href="/delete/{{task.id}}">Delete</a>
+            <br>
+            <a href="/update/{{task.id}}">Update</a>
+            <br>
+            <a href="/complete/{{task.id}}">{{ 'Complete' if task.date_completed is none else 'Uncomplete' }}</a>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div></div>
+
+  <form actions = "/AddTask/" method="POST">
+    <input type="text" name="content" id="content" placeholder="Description">
+    
+    
+    <br>
+    <input type="text" name="owner" id="owner" placeholder="Owner" list="owners">
+    <datalist id="owners">
+        {% for owner in owners %}
+        <option value="{{owner.name}}">
+        {% endfor %}
+    </datalist>
+    
+    <br>
+    <input type="submit" value="Add Task">
+  </form>
+
+</div>
+
+{% endblock %}
+

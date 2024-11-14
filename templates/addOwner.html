@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Kasha!
+{% endblock %}
+
+{% block head%}
+<h1>Welcome to the Add Owner page</h1>
+{% endblock %}
+
+{% block body%}
+<div class= "content"; style="text-align: center">
+  <h1>Owners</h1>
+  <a href="/">Return To Main Page</a>
+  <table class = "center">
+    <tr>
+      <th>Owner ID</th>  
+      <th>Owner Name</th>  
+      <th>Actions</th>  
+    </tr>
+    {% for owner in owners %}
+    <tr>
+        <td>{{owner.id}}</td>
+        <td>{{owner.name}}</td>
+        <td>
+            <a href="/ownerDelete/{{owner.id}}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+  </table>
+  
+  <form actions = "/addOwner" method="POST">
+    <input type="text" name="Ownerid" id="Ownerid" placeholder="Owner ID", value = "{{NewOwnerID}}"">
+    <br>
+    <input type="text" name="ownerName" id="ownerName" placeholder="Owner Name">
+    <br>
+    <input type="submit" value="Add Owner">
+  </form>
+
+</div>
+
+{% endblock %}
+
