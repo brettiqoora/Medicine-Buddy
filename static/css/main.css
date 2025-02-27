@@ -1,50 +1,23 @@
-/* Reset some default browser styles */
-body, h1, table, form, input {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Apply general styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    text-align: center;
-    padding: 20px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-h1 {
-    color: #333;
-}
-
-.content {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, color 0.3s;
-}
-
 /* Style the table */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    width: auto; /* Adjust to fit content width */
+    table-layout: auto; /* Let columns resize based on content */
+    margin: 20px auto; /* Center the table */
+    max-width: 100%; /* Prevent the table from expanding too wide */
+    text-align: center; /* Center the entire table content */
 }
 
 table th, table td {
     padding: 12px;
     border: 1px solid #ddd;
+    font-size: x-small; /* Smaller font size */
 }
 
 table th {
     background-color: #f8f8f8;
     color: #333;
     font-weight: bold;
+    text-align: center; /* Center the header text */
 }
 
 table tr:nth-child(even) {
@@ -61,51 +34,15 @@ table a:hover {
     text-decoration: underline;
 }
 
-/* Style the form */
-form {
-    margin-top: 20px;
-}
-
-form input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-form input[type="submit"] {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-}
-
-form input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
 /* Dark mode styles */
-body.dark-mode {
-    background-color: #121212;
-    color: #e0e0e0;
-}
-
-body.dark-mode .content {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
 body.dark-mode table th, body.dark-mode table td {
-    border: 1px solid #444;
+    font-size: 0.875rem; /* Keep the smaller font size in dark mode as well */
 }
 
 body.dark-mode table th {
     background-color: #333;
     color: #e0e0e0;
+    text-align: center; /* Center the header text in dark mode */
 }
 
 body.dark-mode table tr:nth-child(even) {
@@ -114,57 +51,4 @@ body.dark-mode table tr:nth-child(even) {
 
 body.dark-mode table a {
     color: #bb86fc;
-}
-
-body.dark-mode form input[type="text"] {
-    background-color: #2e2e2e;
-    color: #e0e0e0;
-    border: 1px solid #444;
-}
-
-body.dark-mode form input[type="submit"] {
-    background-color: #bb86fc;
-    color: #121212;
-}
-
-body.dark-mode form input[type="submit"]:hover {
-    background-color: #9a67ea;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .content {
-        padding: 10px;
-    }
-
-    form input[type="text"], form input[type="submit"] {
-        width: 100%;
-    }
-}
-
-/* Toggle button styles */
-.toggle-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.toggle-button:hover {
-    background-color: #0056b3;
-}
-
-body.dark-mode .toggle-button {
-    background-color: #bb86fc;
-    color: #121212;
-}
-
-body.dark-mode .toggle-button:hover {
-    background-color: #9a67ea;
 }
