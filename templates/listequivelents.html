@@ -7,37 +7,45 @@ Equivalent Medicines - Medicine Buddy
 
 {% block body %}
 <div class="content">
+    <div class="nav-buttons">
+        <a href="/home" class="home-link">Back to Home</a>
+    </div>
+    
     <h1>Equivalent Medicines</h1>
     
     <div class="results-container">
         <p class="instruction">Compare prices of equivalent medicines with the same active ingredient</p>
         
-        <table>
-            <thead>
-                <tr>
-                    <th>Medicine Name</th>
-                    <th>Form</th>
-                    <th>Pack Price</th>
-                    <th>Unit Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for drug in drugs %}
-                <tr class="{% if loop.first %}highlight-row{% endif %}">
-                    <td>{{drug.name}} ({{drug.pack_size}})</td>
-                    <td>{{drug.dosage_form}}</td>
-                    <td>${{drug.pack_price|round(2)}}</td>
-                    <td>${{(drug.pack_price / drug.pack_size)|round(2)}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Medicine Name</th>
+                        <th>Form</th>
+                        <th>Pack Price</th>
+                        <th>Unit Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for drug in drugs %}
+                    <tr class="{% if loop.first %}highlight-row{% endif %}">
+                        <td>{{drug.name}} ({{drug.pack_size}})</td>
+                        <td>{{drug.dosage_form}}</td>
+                        <td>${{drug.pack_price|round(2)}}</td>
+                        <td>${{(drug.pack_price / drug.pack_size)|round(2)}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         
         <div class="info-box">
             <p>The highlighted row is the lowest price option. Unit price is calculated per pill/unit to help you compare value.</p>
         </div>
         
-        <a href="/home" class="home-link">Back to Home</a>
+        <div class="nav-buttons bottom">
+            <a href="/home" class="home-link">Back to Home</a>
+        </div>
     </div>
 </div>
 
@@ -86,6 +94,40 @@ Equivalent Medicines - Medicine Buddy
     body.dark-mode .info-box {
         background-color: #2a3142;
         color: #bbb;
+    }
+    
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 15px 0;
+    }
+    
+    .nav-buttons.bottom {
+        margin-top: 30px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        width: 100%;
+    }
+    
+    @media (max-width: 767px) {
+        .results-container {
+            padding: 15px;
+        }
+        
+        table th, table td {
+            padding: 8px 6px;
+        }
+        
+        .instruction {
+            font-size: 1rem;
+        }
+        
+        .info-box {
+            padding: 10px;
+            font-size: 0.85rem;
+        }
     }
 </style>
 {% endblock %}

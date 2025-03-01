@@ -7,35 +7,43 @@ Choose Medicine - Medicine Buddy
 
 {% block body %}
 <div class="content">
+    <div class="nav-buttons">
+        <a href="/home" class="home-link">Back to Home</a>
+    </div>
+    
     <h1>Choose Your Medicine</h1>
     
     <div class="results-container">
         <p class="instruction">Select your medicine from the list below to find equivalents</p>
         
-        <table>
-            <thead>
-                <tr>
-                    <th>Medicine Name</th>
-                    <th>Form</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for drug in drugs %}
-                <tr>
-                    <td>{{drug.name}} ({{drug.pack_size}})</td>
-                    <td>{{drug.dosage_form}}</td>
-                    <td>${{drug.pack_price|round(2)}}</td>
-                    <td>
-                        <a href="{{ url_for('fetch', drug_dosage_form=drug.dosage_form, drug_atc_code=drug.atc_code) }}">Find Equivalents</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Medicine Name</th>
+                        <th>Form</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for drug in drugs %}
+                    <tr>
+                        <td>{{drug.name}} ({{drug.pack_size}})</td>
+                        <td>{{drug.dosage_form}}</td>
+                        <td>${{drug.pack_price|round(2)}}</td>
+                        <td>
+                            <a href="{{ url_for('fetch', drug_dosage_form=drug.dosage_form, drug_atc_code=drug.atc_code) }}">Find Equivalents</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         
-        <a href="/home" class="home-link">Back to Home</a>
+        <div class="nav-buttons bottom">
+            <a href="/home" class="home-link">Back to Home</a>
+        </div>
     </div>
 </div>
 
@@ -61,6 +69,35 @@ Choose Medicine - Medicine Buddy
     
     body.dark-mode .instruction {
         color: #aaa;
+    }
+    
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 15px 0;
+    }
+    
+    .nav-buttons.bottom {
+        margin-top: 30px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        width: 100%;
+    }
+    
+    @media (max-width: 767px) {
+        .results-container {
+            padding: 15px;
+        }
+        
+        table th, table td {
+            padding: 8px 6px;
+        }
+        
+        .instruction {
+            font-size: 1rem;
+        }
     }
 </style>
 {% endblock %}
