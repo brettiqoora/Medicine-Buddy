@@ -1,49 +1,66 @@
+
 {% extends 'base.html' %}
 
-{% block title%}
-Medicine Buddy
+{% block title %}
+Choose Medicine - Medicine Buddy
 {% endblock %}
 
-{% block head%}
-<h1>Find your drug below and click GO to find equivelents</h1>
-{% endblock %}
-
-{% block body%}
-<div class= "content"; style="text-align: center">
-  <a target="_blank" href="https://icons8.com/icon/spI43Cg8MTCV/reminders">App</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-  <a href="{{url_for('home')}}">HOME</a>
-  <h1>Drug Chooser</h1>
-  
-
-  <table class = "center">
-    <tr>
-      <!-- <th>Code</th> --> 
-      <th>Name </th>  
-      <!--<th>ATC</th>  -->
-      <th>Form</th>  
-     <!-- <th>Packsize</th>  -->   
-      <th>Pack Price</th>
-      <th> </th>
-    </tr>
-    {% for drug in drugs %}
-    <tr>
-        <!--<td>{{drug.code}}</td>-->
-        <td>{{drug.name}} ({{drug.pack_size}})</td>
-        <!--<td>{{drug.atc_code}}</td>-->
-        <td>{{drug.dosage_form}}</td>
-        <!--<td>{{drug.pack_size}}</td>-->
-        <td>{{drug.pack_price}}</td>
-        <td> 
-          <a href="{{ url_for('fetch', drug_dosage_form=drug.dosage_form, drug_atc_code=drug.atc_code) }}">GO</a>
-        </td>
-    </tr>
+{% block body %}
+<div class="content">
+    <h1>Choose Your Medicine</h1>
     
-    {% endfor %}
-
-  </table>
-  <a href="/home">HOME</a>
+    <div class="results-container">
+        <p class="instruction">Select your medicine from the list below to find equivalents</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Form</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for drug in drugs %}
+                <tr>
+                    <td>{{drug.name}} ({{drug.pack_size}})</td>
+                    <td>{{drug.dosage_form}}</td>
+                    <td>${{drug.pack_price|round(2)}}</td>
+                    <td>
+                        <a href="{{ url_for('fetch', drug_dosage_form=drug.dosage_form, drug_atc_code=drug.atc_code) }}">Find Equivalents</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <a href="/home" class="home-link">Back to Home</a>
+    </div>
 </div>
 
-
+<style>
+    .results-container {
+        background-color: white;
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    body.dark-mode .results-container {
+        background-color: #333;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .instruction {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #666;
+        font-size: 1.1rem;
+    }
+    
+    body.dark-mode .instruction {
+        color: #aaa;
+    }
+</style>
 {% endblock %}
-

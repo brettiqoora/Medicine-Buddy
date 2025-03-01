@@ -1,45 +1,91 @@
+
 {% extends 'base.html' %}
 
-{% block title%}
-Medicine Buddy
+{% block title %}
+Equivalent Medicines - Medicine Buddy
 {% endblock %}
 
-{% block head%}
-<h1>List of Equivelents</h1>
-{% endblock %}
-
-{% block body%}
-<div class= "content"; style="text-align: center">
-  <a target="_blank" href="https://icons8.com/icon/spI43Cg8MTCV/reminders">App</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-  <h1>Equivelents</h1>
-  
-
-  <table class = "center">
-    <tr>
-     <!-- <th>Code</th> --> 
-     <th>Name </th>  
-     <!--<th>ATC</th>  -->
-     <th>Form</th>  
-    <!-- <th>Packsize</th>  -->   
-     <th>Pack Price</th>
-     
-      
-    </tr>
-    {% for drug in drugs %}
-    <tr>
-        <!--<td>{{drug.code}}</td>-->
-        <td>{{drug.name}} ({{drug.pack_size}})</td>
-        <!--<td>{{drug.atc_code}}</td>-->
-        <td>{{drug.dosage_form}}</td>
-        <!--<td>{{drug.pack_size}}</td>-->
-        <td>{{drug.pack_price}}</td>
+{% block body %}
+<div class="content">
+    <h1>Equivalent Medicines</h1>
+    
+    <div class="results-container">
+        <p class="instruction">Compare prices of equivalent medicines with the same active ingredient</p>
         
-    </tr>
-    {% endfor %}
-  </table>
-  <a href="/home">HOME</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Form</th>
+                    <th>Pack Price</th>
+                    <th>Unit Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for drug in drugs %}
+                <tr class="{% if loop.first %}highlight-row{% endif %}">
+                    <td>{{drug.name}} ({{drug.pack_size}})</td>
+                    <td>{{drug.dosage_form}}</td>
+                    <td>${{drug.pack_price|round(2)}}</td>
+                    <td>${{(drug.pack_price / drug.pack_size)|round(2)}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="info-box">
+            <p>The highlighted row is the lowest price option. Unit price is calculated per pill/unit to help you compare value.</p>
+        </div>
+        
+        <a href="/home" class="home-link">Back to Home</a>
+    </div>
 </div>
 
-
+<style>
+    .results-container {
+        background-color: white;
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    body.dark-mode .results-container {
+        background-color: #333;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .instruction {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #666;
+        font-size: 1.1rem;
+    }
+    
+    body.dark-mode .instruction {
+        color: #aaa;
+    }
+    
+    .highlight-row {
+        background-color: #e8f5e9 !important;
+        font-weight: bold;
+    }
+    
+    body.dark-mode .highlight-row {
+        background-color: #1e3320 !important;
+    }
+    
+    .info-box {
+        background-color: #f0f5ff;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 20px 0;
+        font-size: 0.9rem;
+        color: #555;
+    }
+    
+    body.dark-mode .info-box {
+        background-color: #2a3142;
+        color: #bbb;
+    }
+</style>
 {% endblock %}
-

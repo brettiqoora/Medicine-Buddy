@@ -1,30 +1,54 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" >
+    <meta name="description" content="Medicine Buddy - Find drug equivalents and compare prices">
+    <meta name="theme-color" content="#4a89dc">
+    <title>{% block title %}Medicine Buddy{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    {% block head%}{% endblock %}
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon150.png') }}">
+    {% block head %}{% endblock %}
 </head>
 <body>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <button class="toggle-button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    {% block body%}{% endblock %}
+    <button class="toggle-button" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()">
+        <span id="mode-text">Dark Mode</span>
+    </button>
+    
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+    
+    <div class="footer">
+        <p>© 2023 Medicine Buddy - <a target="_blank" href="https://icons8.com/icon/spI43Cg8MTCV/reminders">App</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a></p>
+    </div>
+
     <script>
+        // Check for saved theme preference or use preferred color scheme
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('dark-mode');
+        
+        if (savedTheme === 'true' || (savedTheme === null && prefersDark)) {
+            document.body.classList.add('dark-mode');
+            document.getElementById('mode-text').textContent = 'Light Mode';
+        }
+        
+        function toggleDarkMode() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            document.getElementById('mode-text').textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+            localStorage.setItem('dark-mode', isDarkMode);
+        }
+        
+        // Service worker registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/static/service-worker.js')
-              .then(registration => console.log('Service Worker registered with scope:', registration.scope))
-              .catch(error => console.error('Service Worker registration failed:', error));
-    });
-  }
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');    
+                navigator.serviceWorker.register('/static/service-worker.js')
+                    .then(registration => console.log('Service Worker registered with scope:', registration.scope))
+                    .catch(error => console.error('Service Worker registration failed:', error));
+            });
         }
     </script>
 </body>
-
 </html>

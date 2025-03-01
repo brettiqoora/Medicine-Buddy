@@ -1,54 +1,257 @@
-/* Style the table */
+
+/* Global Styles */
+:root {
+  --primary-color: #4a89dc;
+  --secondary-color: #5cb85c;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --border-color: #ddd;
+  --hover-color: #3a7bd5;
+  --dark-bg: #222;
+  --dark-text: #e0e0e0;
+  --dark-border: #444;
+  --dark-primary: #6c9fff;
+  --dark-secondary: #6ed46e;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--light-bg);
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+body.dark-mode h1 {
+  color: var(--dark-primary);
+}
+
+/* Button Styles */
+button, input[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: var(--hover-color);
+}
+
+body.dark-mode button, 
+body.dark-mode input[type="submit"] {
+  background-color: var(--dark-primary);
+}
+
+body.dark-mode button:hover, 
+body.dark-mode input[type="submit"]:hover {
+  background-color: #5a8ae6;
+}
+
+.toggle-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}
+
+/* Form Styles */
+form {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  form {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+body.dark-mode input[type="text"] {
+  background-color: #333;
+  color: var(--dark-text);
+  border-color: var(--dark-border);
+}
+
+/* Table Styles */
 table {
-    width: auto; /* Adjust to fit content width */
-    table-layout: auto; /* Let columns resize based on content */
-    margin: 20px auto; /* Center the table */
-    max-width: 100%; /* Prevent the table from expanding too wide */
-    text-align: center; /* Center the entire table content */
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+body.dark-mode table {
+  background-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 table th, table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    font-size: x-small; /* Smaller font size */
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+body.dark-mode table th, 
+body.dark-mode table td {
+  border-color: var(--dark-border);
 }
 
 table th {
-    background-color: #f8f8f8;
-    color: #333;
-    font-weight: bold;
-    text-align: center; /* Center the header text */
-}
-
-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Style links in the table */
-table a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-table a:hover {
-    text-decoration: underline;
-}
-
-/* Dark mode styles */
-body.dark-mode table th, body.dark-mode table td {
-    font-size: 0.875rem; /* Keep the smaller font size in dark mode as well */
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
 }
 
 body.dark-mode table th {
-    background-color: #333;
-    color: #e0e0e0;
-    text-align: center; /* Center the header text in dark mode */
+  background-color: var(--dark-primary);
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 body.dark-mode table tr:nth-child(even) {
-    background-color: #2e2e2e;
+  background-color: #2a2a2a;
+}
+
+/* Link Styles */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--hover-color);
+  text-decoration: underline;
+}
+
+body.dark-mode a {
+  color: var(--dark-primary);
+}
+
+body.dark-mode a:hover {
+  color: #7ba9ff;
+}
+
+table a {
+  font-weight: bold;
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+table a:hover {
+  background-color: #4cae4c;
+  text-decoration: none;
 }
 
 body.dark-mode table a {
-    color: #bb86fc;
+  background-color: var(--dark-secondary);
+}
+
+body.dark-mode table a:hover {
+  background-color: #5ac85a;
+}
+
+/* Home link */
+.home-link {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.home-link:hover {
+  background-color: var(--hover-color);
+  text-decoration: none;
+}
+
+body.dark-mode .home-link {
+  background-color: var(--dark-primary);
+}
+
+body.dark-mode .home-link:hover {
+  background-color: #5a8ae6;
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+body.dark-mode .footer {
+  color: #999;
+}
+
+/* For smaller screens */
+@media (max-width: 767px) {
+  table {
+    font-size: 0.9rem;
+  }
+  
+  table th, table td {
+    padding: 8px 10px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
 }
